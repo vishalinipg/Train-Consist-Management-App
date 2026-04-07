@@ -3,65 +3,55 @@
  * MAIN CLASS - TrainConsistMgmtApp
  * ====================================================================
  *
- * Use Case 4: Maintain Ordered Bogie Consist
+ * Use Case 5: Preserve Insertion Order of Bogies
  *
  * Description:
- * This class models the physical chaining of train bogies
- * using LinkedList for ordered operations.
+ * This class maintains the exact attachment order of bogies
+ * while also preventing duplicate entries using LinkedHashSet.
  *
  * At this stage, the application:
- * - Adds bogies in sequence
- * - Inserts bogies at specific positions
- * - Removes bogies from front and rear
- * - Displays updated train structure
+ * - Attaches bogies in order
+ * - Preserves insertion sequence
+ * - Avoids duplicate bogies
+ * - Displays final train formation
  *
- * This maps positional operations using LinkedList.
+ * This maps ordered uniqueness using LinkedHashSet.
  *
  * @author Vishalini P G
- * @version 4.0
+ * @version 5.0
  */
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class TrainConsistMgmtApp {
 
     public static void main(String[] args) {
 
-        System.out.println("=====================================");
-        System.out.println("UC4 - Maintain Ordered Bogie Consist");
-        System.out.println("=====================================\n");
+        System.out.println("==================================================");
+        System.out.println("UC5 - Preserve Insertion Order of Bogies");
+        System.out.println("==================================================\n");
 
-        // Create a LinkedList
-        // LinkedList maintains insertion order and allows fast inserts
-        List<String> trainConsist = new LinkedList<>();
+        // LinkedHashSet preserves order and ensures uniqueness
+        Set<String> formation = new LinkedHashSet<>();
 
-        // ---- ADD INITIAL BOGIES ----
-        trainConsist.add("Engine");
-        trainConsist.add("Sleeper");
-        trainConsist.add("AC");
-        trainConsist.add("Cargo");
-        trainConsist.add("Guard");
+        // ---- ADD BOGIES ----
+        formation.add("Engine");
+        formation.add("Sleeper");
+        formation.add("Cargo");
+        formation.add("Guard");
 
-        System.out.println("Initial Train Consist:");
-        System.out.println(trainConsist);
+        // Attempt to add duplicate
+        formation.add("Sleeper"); // duplicate (ignored)
 
-        // ---- INSERT AT POSITION ----
-        // Insert "Pantry Car" at index 2 (3rd position)
-        trainConsist.add(2, "Pantry Car");
+        // ---- DISPLAY FINAL FORMATION ----
+        System.out.println("Final Train Formation:");
+        System.out.println(formation);
 
-        System.out.println("\nAfter Inserting 'Pantry Car' at position 2:");
-        System.out.println(trainConsist);
+        // ---- NOTE ----
+        System.out.println("\nNote:");
+        System.out.println("LinkedHashSet preserves insertion order and removes duplicates automatically.");
 
-        // ---- REMOVE FIRST AND LAST ----
-        // Since we used List reference, we cast to LinkedList
-        LinkedList<String> ll = (LinkedList<String>) trainConsist;
-        ll.removeFirst();
-        ll.removeLast();
-
-        System.out.println("\nAfter Removing First and Last Bogie:");
-        System.out.println(trainConsist);
-
-        System.out.println("\nUC4 ordered consist operations completed...");
+        System.out.println("UC5 formation setup completed...");
     }
 }
